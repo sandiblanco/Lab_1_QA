@@ -1,3 +1,18 @@
+/* 
+Complejidad Ciclomatica de buscarVuelos
+
+// Decisiones encontradas: 
+// 01) v.fechaSalida.getFullYear() === fecha.getFullYear() && v.fechaSalida.getMonth() === fecha.getMonth() 
+// 02) v.fechaSalida.getMonth() === fecha.getMonth() && v.fechaSalida.getDate() === fecha.getDate()
+// 03) v.estado === 'programado' || v.estado === 'retrasado'    
+// 04) mismoOrigen && mismoDestino
+// 05) mismoDestino && mismaFecha
+// 06) mismaFecha && estadoValido
+
+// CC = 7
+*/
+
+
 import { TestBed } from '@angular/core/testing';
 import { VueloService } from './vuelo.service';
 import { Vuelo } from '../models/vuelo.model';
