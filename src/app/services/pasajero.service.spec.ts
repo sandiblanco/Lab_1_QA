@@ -1,8 +1,22 @@
 /**
-    1. calcularCategoria(fechaNacimiento): 4 pruebas (una por cada rango de edad).
-    2. validarPasajero(pasajero): 4 pruebas (datos correctos, nombre vacío, pasaporte e email inválidos).
-    3. obtenerBeneficiosFrecuente(pasajero): 2 pruebas (membresía alta vs sin membresía).
-    4. calcularMillasGanadas(duracion, clase, nivel): 1 prueba (cálculo básico)
+ * Complejidad Ciclomatica de validarPasajero:
+ * Decisiones encontradas: 
+ *      if(nombre vacio)
+ *      if(apellido vacio)
+ *      if(pasaporte invalido)
+ *      if(email sin @)
+ *      if(email sin punto)
+ *      if(fechaFutura)
+ *      if(telefono corto)
+ *      if(contactoEmergencia incompleto)
+ *      if(esInfante)
+ *      if(relacion no padre/madre)
+ * CC = 11
+ * 
+ * 1. calcularCategoria(fechaNacimiento): 4 pruebas (una por cada rango de edad).
+ * 2. validarPasajero(pasajero): 4 pruebas (datos correctos, nombre vacío, pasaporte e email inválidos).
+ * 3. obtenerBeneficiosFrecuente(pasajero): 2 pruebas (membresía alta vs sin membresía).
+ * 4. calcularMillasGanadas(duracion, clase, nivel): 1 prueba (cálculo básico)
  */
 
 import { Pasajero } from "../models/pasajero.model";
