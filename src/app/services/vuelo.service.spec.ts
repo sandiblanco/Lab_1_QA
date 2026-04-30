@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { VueloService } from './vuelo.service';
+import { Vuelo } from '../models/vuelo.model';
 
 describe('VueloService', () => {
     let service: VueloService;
-    const vuelos: any[] = [];
+    let vuelos: any[] = [];
     beforeEach(() => {
         TestBed.configureTestingModule({});
         service = TestBed.inject(VueloService);
@@ -13,18 +14,38 @@ describe('VueloService', () => {
     describe('clasificarDuracion', () => {
         it('Duración corta', () => {
             // Arrange
-            vuelos[0].duracionMinutos = 90;
+            const vuelo = { duracionMinutos: 90 } as Vuelo;
             // Act
-            const resultado = service.clasificarDuracion(vuelos[0]);
+            const resultado = service.clasificarDuracion(vuelo);
             // Assert
             expect(resultado).toBe('corto');
         });
 
-        it('Valor frontera', () => {
+        it('Valor frontera de vuelo medio', () => {
+            // Arrange
+            const vuelo = { duracionMinutos: 180 } as Vuelo;
             // Act
-            const resultado = service.clasificarDuracion(vuelos[3]);
+            const resultado = service.clasificarDuracion(vuelo);
             // Assert
-            expect(resultado).toBe('corto');
+            expect(resultado).toBe('medio');
+        });
+
+        it('Valor frontera de vuelo largo', () => {
+            // Arrange
+            const vuelo = { duracionMinutos: 600 } as Vuelo;
+            // Act
+            const resultado = service.clasificarDuracion(vuelo);
+            // Assert
+            expect(resultado).toBe('largo');
+        });
+
+        it('Duración muy larga', () => {
+            // Arrange
+            const vuelo = { duracionMinutos: 900 } as Vuelo;
+            // Act
+            const resultado = service.clasificarDuracion(vuelo);
+            // Assert
+            expect(resultado).toBe('ultra_largo');
         });
     });
 });
