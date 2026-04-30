@@ -11,6 +11,7 @@ describe('VueloService', () => {
         vuelos = service.obtenerTodos();
     });
 
+    
     // Pruebas para la función clasificarDuracion
     describe('clasificarDuracion', () => {
         it('Duración corta', () => {
@@ -89,4 +90,47 @@ describe('VueloService', () => {
             expect(resultado).toBe('0m');
         });
     });
+
+
+    // Pruebas para la función calcularOcupacion
+    describe('calcularOcupacion', () => {
+        it('Vuelo con ocupación del 50%', () => {
+            // Arrange
+            const vuelo = { asientosTotales: 200, asientosOcupados: 100 } as Vuelo;
+            // Act
+            const resultado = service.calcularOcupacion(vuelo);
+            // Assert
+            expect(resultado).toBe(50);
+        });
+
+        it('Vuelo con ocupación del 30%', () => {
+            // Arrange
+            const vuelo = { asientosTotales: 150, asientosOcupados: 45 } as Vuelo;
+            // Act
+            const resultado = service.calcularOcupacion(vuelo);
+            // Assert
+            expect(resultado).toBe(30);
+        });
+
+        it('Vuelo completamente lleno', () => {
+            // Arrange
+            const vuelo = { asientosTotales: 150, asientosOcupados: 150 } as Vuelo;
+            // Act
+            const resultado = service.calcularOcupacion(vuelo);
+            // Assert
+            expect(resultado).toBe(100);
+        });
+
+        it('Vuelo sin asientos', () => {
+            // Arrange
+            const vuelo = { asientosTotales: 0, asientosOcupados: 300 } as Vuelo;
+            // Act
+            const resultado = service.calcularOcupacion(vuelo);
+            // Assert
+            expect(resultado).toBe(0);
+        });
+    });
+
+
+    describe('esInternacional', () => {
 });
