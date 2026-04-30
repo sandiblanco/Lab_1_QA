@@ -12,7 +12,7 @@ describe('VueloService', () => {
     });
 
     
-    // Pruebas para la función clasificarDuracion
+    // Pruebas para el método que clasifica la duración de un vuelo
     describe('clasificarDuracion', () => {
         it('Duración corta', () => {
             // Arrange
@@ -52,7 +52,7 @@ describe('VueloService', () => {
     });
 
 
-    // Pruebas para la función formatearDuracion
+    // Pruebas para el método que formatea la duración de un vuelo en horas y minutos
     describe('formatearDuracion', () => {
         it('Cuando hay horas y minutos', () => {
             // Arrange
@@ -92,7 +92,7 @@ describe('VueloService', () => {
     });
 
 
-    // Pruebas para la función calcularOcupacion
+    // Pruebas para el método que calcula la ocupación de un vuelo
     describe('calcularOcupacion', () => {
         it('Vuelo con ocupación del 50%', () => {
             // Arrange
@@ -132,7 +132,7 @@ describe('VueloService', () => {
     });
 
 
-    // Pruebas para la función obtenerAsientosDisponibles
+    // Pruebas para el método de obtener asientos disponibles de un vuelo
     describe('obtenerAsientosDisponibles', () => {
         it('Vuelo con asientos disponibles', () => {
             // Arrange
@@ -159,6 +159,43 @@ describe('VueloService', () => {
             const resultado = service.obtenerAsientosDisponibles(vueloId);
             // Assert
             expect(resultado).toBe(0);
+        });
+    });
+
+
+    // Pruebas para el método de buscar vuelos filtrando por ciudad origen, destino y fecha.
+    describe('buscarVuelos', () => {
+        it('Buscar una ruta existente', () => {
+            // Arrange
+            const origen = 'San José';
+            const destino = 'Miami';
+            const fecha = new Date('2026-04-15T06:00:00');
+            // Act
+            const resultado = service.buscarVuelos(origen, destino, fecha);
+            // Assert
+            expect(resultado.length).toBeGreaterThan(0);
+        });
+
+        it('Retorna un arreglo vacío para una ruta inexistente', () => {
+            // Arrange
+            const origen = 'Panamá';
+            const destino = 'Japón';
+            const fecha = new Date('2026-04-15T06:00:00');
+            // Act
+            const resultado = service.buscarVuelos(origen, destino, fecha);
+            // Assert
+            expect(resultado).toEqual([]);
+        });
+
+        it(' Verificar que los resultados vienen ordenados correctamente', () => {
+            // Arrange
+            const origen = 'San José';
+            const destino = 'Miami';
+            const fecha = new Date('2026-04-15T06:00:00');
+            // Act
+            const resultado = service.buscarVuelos(origen, destino, fecha);
+            // Assert
+            expect(resultado[0].precioBase).toBeLessThan(resultado[1].precioBase);
         });
     });
 });
