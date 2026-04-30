@@ -198,4 +198,27 @@ describe('VueloService', () => {
             expect(resultado[0].precioBase).toBeLessThan(resultado[1].precioBase);
         });
     });
+
+    // Pruebas para el método de validar la conexión entre dos vuelos
+    describe('validarConexion', () => {
+        it('Conexión válida entre dos vuelos', () => {
+            // Arrange
+            const vuelo1 = { destino: 'Miami', fechaLlegada: new Date('2026-04-15T08:00:00'), estado: 'programado' } as Vuelo;
+            const vuelo2 = { origen: 'Miami', fechaSalida: new Date('2026-04-15T10:00:00'), estado: 'retrasado' } as Vuelo;
+            // Act
+            const resultado = service.validarConexion(vuelo1, vuelo2);
+            // Assert
+            expect(resultado.valida).toBeTrue();
+        });
+
+        it('Conexión inválida por ciudades que no coinciden', () => {
+            // Arrange
+            const vuelo1 = { destino: 'Miami', fechaLlegada: new Date('2026-04-15T08:00:00'), estado: 'programado' } as Vuelo;
+            const vuelo2 = { origen: 'Costa Rica', fechaSalida: new Date('2026-04-15T10:00:00'), estado: 'retrasado' } as Vuelo;
+            // Act
+            const resultado = service.validarConexion(vuelo1, vuelo2);
+            // Assert
+            expect(resultado.valida).toBeFalse();
+        });
+    });
 });
