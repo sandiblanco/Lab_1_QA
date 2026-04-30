@@ -130,7 +130,4 @@ describe('VueloService', () => {
             expect(resultado).toBe(0);
         });
     });
-
-
-    describe('esInternacional', () => {
 });
