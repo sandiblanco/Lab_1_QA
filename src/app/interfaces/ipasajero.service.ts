@@ -11,4 +11,5 @@ export interface IPasajeroService {
   calcularCategoria(fechaNacimiento: Date): CategoriaPasajero;
   verificarDocumentos(pasajero: Pasajero, paisDestino: string): { aprobado: boolean; razon: string };
   obtenerBeneficiosFrecuente(pasajero: Pasajero): { descuento: number; equipajeExtra: number; salaVip: boolean; prioridadAbordaje: boolean };
+  calcularMillasGanadas(duracionMinutos: number, clase: string, nivelFrecuente: string): number;
 }
