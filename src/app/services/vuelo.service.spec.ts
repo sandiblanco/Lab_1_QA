@@ -132,5 +132,33 @@ describe('VueloService', () => {
     });
 
 
-    describe('esInternacional', () => {
+    // Pruebas para la función obtenerAsientosDisponibles
+    describe('obtenerAsientosDisponibles', () => {
+        it('Vuelo con asientos disponibles', () => {
+            // Arrange
+            const vueloId = 1;
+            // Act
+            const resultado = service.obtenerAsientosDisponibles(vueloId);
+            // Assert
+            expect(resultado).toBe(60);
+        });
+
+        it('Vuelo que no existe', () => {
+            // Arrange
+            const vueloId = 20;
+            // Act
+            const resultado = service.obtenerAsientosDisponibles(vueloId);
+            // Assert
+            expect(resultado).toBe(-1);
+        });
+
+        it('Vuelo cancelado', () => {
+            // Arrange
+            const vueloId = 5;
+            // Act
+            const resultado = service.obtenerAsientosDisponibles(vueloId);
+            // Assert
+            expect(resultado).toBe(0);
+        });
+    });
 });
