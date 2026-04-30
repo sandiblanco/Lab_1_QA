@@ -11,6 +11,7 @@ describe('VueloService', () => {
         vuelos = service.obtenerTodos();
     });
 
+    // Pruebas para la función clasificarDuracion
     describe('clasificarDuracion', () => {
         it('Duración corta', () => {
             // Arrange
@@ -46,6 +47,46 @@ describe('VueloService', () => {
             const resultado = service.clasificarDuracion(vuelo);
             // Assert
             expect(resultado).toBe('ultra_largo');
+        });
+    });
+
+
+    // Pruebas para la función formatearDuracion
+    describe('formatearDuracion', () => {
+        it('Cuando hay horas y minutos', () => {
+            // Arrange
+            const minutos = 330; // 5 horas y 30 minutos
+            // Act
+            const resultado = service.formatearDuracion(minutos);
+            // Assert
+            expect(resultado).toBe('5h 30m');
+        });
+
+        it('Cuando solo hay minutos', () => {
+            // Arrange
+            const minutos = 45;
+            // Act
+            const resultado = service.formatearDuracion(minutos);
+            // Assert
+            expect(resultado).toBe('45m');
+        });
+
+        it('Cuando solo hay horas', () => {
+            // Arrange
+            const minutos = 120; // 2 horas
+            // Act
+            const resultado = service.formatearDuracion(minutos);
+            // Assert
+            expect(resultado).toBe('2h');
+        });
+
+        it('Valor negativo', () => {
+            // Arrange
+            const minutos = -30;
+            // Act
+            const resultado = service.formatearDuracion(minutos);
+            // Assert
+            expect(resultado).toBe('0m');
         });
     });
 });
