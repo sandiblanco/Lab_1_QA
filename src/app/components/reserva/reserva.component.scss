@@ -1,0 +1,194 @@
+.reserva-container {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 300;
+  color: #1a237e;
+  margin-bottom: 24px;
+}
+
+.no-vuelo {
+  text-align: center;
+  padding: 60px;
+  color: #999;
+  mat-icon { font-size: 64px; width: 64px; height: 64px; }
+}
+
+.reserva-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vuelo-info-card {
+  border-radius: 12px !important;
+  border-left: 4px solid #3f51b5;
+}
+
+.vuelo-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 16px;
+
+  .detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #555;
+    font-size: 14px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #3f51b5;
+    }
+  }
+}
+
+.section-card {
+  border-radius: 12px !important;
+}
+
+.pasajeros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.pasajero-item {
+  cursor: pointer;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &.selected {
+    border-color: #3f51b5;
+    background: #e8eaf6;
+  }
+
+  .pasajero-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    mat-icon {
+      color: #999;
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+
+    strong { display: block; }
+
+    .pasajero-detail {
+      display: block;
+      font-size: 12px;
+      color: #999;
+    }
+  }
+
+  .check-icon {
+    color: #3f51b5;
+  }
+}
+
+.opciones-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+
+  mat-checkbox {
+    mat-icon {
+      margin-right: 4px;
+      font-size: 18px;
+      vertical-align: middle;
+    }
+  }
+
+  .comida-select {
+    max-width: 300px;
+    margin-top: 8px;
+  }
+}
+
+.precio-card {
+  border-left: 4px solid #4caf50;
+}
+
+.precio-desglose {
+  padding-top: 16px;
+}
+
+.precio-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 15px;
+
+  &.descuento span:last-child {
+    color: #4caf50;
+  }
+
+  &.total {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a237e;
+    padding-top: 12px;
+  }
+}
+
+mat-divider {
+  margin: 8px 0;
+}
+
+.reserva-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.resultado-card {
+  border-radius: 12px !important;
+
+  &.exito { border-left: 4px solid #4caf50; }
+  &.error { border-left: 4px solid #f44336; }
+
+  .resultado-exito, .resultado-error {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+
+    h3 { margin: 0 0 8px; }
+    p { margin: 2px 0; color: #666; }
+  }
+
+  .resultado-exito mat-icon { color: #4caf50; }
+  .resultado-error mat-icon { color: #f44336; }
+}

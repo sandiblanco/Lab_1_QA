@@ -1,0 +1,140 @@
+.historial-container {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 300;
+  color: #1a237e;
+  margin-bottom: 24px;
+}
+
+.resumen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.resumen-card {
+  border-radius: 12px !important;
+  text-align: center;
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px !important;
+  }
+
+  .resumen-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: #3f51b5;
+  }
+
+  .resumen-label {
+    font-size: 14px;
+    color: #999;
+    margin-top: 4px;
+  }
+}
+
+.no-reservas {
+  text-align: center;
+  padding: 60px;
+  color: #999;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.reserva-panel {
+  margin-bottom: 8px;
+  border-radius: 8px !important;
+}
+
+mat-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .reserva-codigo {
+    font-weight: 600;
+    color: #3f51b5;
+  }
+}
+
+.reserva-detail {
+  padding: 16px 0;
+}
+
+.detail-section {
+  margin-bottom: 20px;
+
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 16px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: #3f51b5;
+    }
+  }
+
+  p {
+    margin: 4px 0 4px 28px;
+    color: #666;
+  }
+}
+
+.pasajero-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 4px 28px;
+  color: #666;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #999;
+  }
+}
+
+.cambio-line {
+  display: flex;
+  gap: 12px;
+  padding: 4px 0 4px 28px;
+  font-size: 13px;
+
+  .cambio-fecha { color: #999; min-width: 130px; }
+  .cambio-tipo { font-weight: 600; color: #3f51b5; min-width: 100px; }
+  .cambio-desc { color: #666; }
+}
+
+.precio-section h4 {
+  color: #1a237e !important;
+  font-size: 18px !important;
+}
+
+.reserva-acciones {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}

@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Estilos globales adicionales para SkyRoute */
+a {
+  text-decoration: none;
+}
+
+.mat-mdc-card {
+  border-radius: 12px !important;
+}

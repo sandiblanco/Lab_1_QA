@@ -1,0 +1,105 @@
+<div class="historial-container">
+  <h1 class="page-title">
+    <mat-icon>list_alt</mat-icon>
+    Historial de Reservas
+  </h1>
+
+  <!-- Resumen -->
+  <div class="resumen-grid">
+    <mat-card class="resumen-card">
+      <mat-card-content>
+        <span class="resumen-value">{{ resumen.totalReservas || 0 }}</span>
+        <span class="resumen-label">Total Reservas</span>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="resumen-card">
+      <mat-card-content>
+        <span class="resumen-value">${{ resumen.ingresosTotales || 0 }}</span>
+        <span class="resumen-label">Ingresos</span>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="resumen-card">
+      <mat-card-content>
+        <span class="resumen-value">{{ resumen.pasajerosUnicos || 0 }}</span>
+        <span class="resumen-label">Pasajeros Únicos</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Lista de Reservas -->
+  <div *ngIf="reservas.length === 0" class="no-reservas">
+    <mat-icon>inbox</mat-icon>
+    <p>No hay reservas registradas.</p>
+    <a mat-raised-button color="primary" routerLink="/buscar">Buscar Vuelos</a>
+  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let reserva of reservas" class="reserva-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon [style.color]="getEstadoColor(reserva.estado)">
+            {{ getEstadoIcon(reserva.estado) }}
+          </mat-icon>
+          <span class="reserva-codigo">{{ reserva.codigoReserva }}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ reserva.vuelo.origen }} → {{ reserva.vuelo.destino }}
+          | {{ reserva.vuelo.codigo }}
+          | ${{ reserva.precioTotal }}
+          | {{ reserva.estado | uppercase }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="reserva-detail">
+        <div class="detail-section">
+          <h4><mat-icon>flight</mat-icon> Información del Vuelo</h4>
+          <p>Vuelo: {{ reserva.vuelo.codigo }}</p>
+          <p>Ruta: {{ reserva.vuelo.origen }} → {{ reserva.vuelo.destino }}</p>
+          <p>Fecha: {{ reserva.vuelo.fechaSalida | date:'dd/MM/yyyy HH:mm' }}</p>
+          <p>Clase: {{ reserva.vuelo.clase | titlecase }}</p>
+        </div>
+
+        <div class="detail-section">
+          <h4><mat-icon>people</mat-icon> Pasajeros ({{ reserva.pasajeros.length }})</h4>
+          <div *ngFor="let p of reserva.pasajeros" class="pasajero-line">
+            <mat-icon>person</mat-icon>
+            {{ p.nombreCompleto }} ({{ p.pasaporte }}) - {{ p.categoria }}
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4><mat-icon>tune</mat-icon> Opciones</h4>
+          <mat-chip-set>
+            <mat-chip *ngIf="reserva.opciones.equipajeExtra">Equipaje Extra</mat-chip>
+            <mat-chip *ngIf="reserva.opciones.seleccionAsiento">Asiento Seleccionado</mat-chip>
+            <mat-chip *ngIf="reserva.opciones.seguroViaje">Seguro de Viaje</mat-chip>
+            <mat-chip *ngIf="reserva.opciones.comidaEspecial">{{ reserva.opciones.comidaEspecial }}</mat-chip>
+            <mat-chip *ngIf="reserva.opciones.prioridadAbordaje">Prioridad</mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div class="detail-section">
+          <h4><mat-icon>history</mat-icon> Historial de Cambios</h4>
+          <div *ngFor="let cambio of reserva.historialCambios" class="cambio-line">
+            <span class="cambio-fecha">{{ cambio.fecha | date:'dd/MM/yyyy HH:mm' }}</span>
+            <span class="cambio-tipo">{{ cambio.tipo | uppercase }}</span>
+            <span class="cambio-desc">{{ cambio.descripcion }}</span>
+          </div>
+        </div>
+
+        <div class="detail-section precio-section">
+          <h4><mat-icon>receipt</mat-icon> Total: ${{ reserva.precioTotal }} {{ reserva.moneda }}</h4>
+        </div>
+
+        <div class="reserva-acciones" *ngIf="reserva.estado === 'pendiente' || reserva.estado === 'confirmada'">
+          <button mat-raised-button color="primary" *ngIf="reserva.estado === 'pendiente'" (click)="confirmar(reserva.id)">
+            <mat-icon>check</mat-icon> Confirmar
+          </button>
+          <button mat-raised-button color="warn" (click)="cancelar(reserva.id)">
+            <mat-icon>cancel</mat-icon> Cancelar
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

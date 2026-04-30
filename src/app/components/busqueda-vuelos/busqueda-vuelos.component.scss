@@ -1,0 +1,211 @@
+.busqueda-container {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 300;
+  color: #1a237e;
+  margin-bottom: 24px;
+}
+
+.search-card {
+  border-radius: 12px !important;
+  margin-bottom: 32px;
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px 0;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.search-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.no-results {
+  text-align: center;
+  color: #999;
+  font-size: 18px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.vuelos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vuelo-card {
+  border-radius: 12px !important;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+  }
+}
+
+.vuelo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.vuelo-codigo {
+  .codigo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3f51b5;
+    margin-right: 12px;
+  }
+  .aerolinea {
+    color: #999;
+    font-size: 14px;
+  }
+}
+
+.vuelo-ruta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ciudad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+
+  .nombre {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .hora {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.linea-vuelo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .duracion {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 4px;
+  }
+
+  .linea {
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, #3f51b5, #ff4081);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      color: #3f51b5;
+      background: white;
+      padding: 0 4px;
+    }
+  }
+
+  .escalas {
+    font-size: 12px;
+    color: #ff9800;
+    margin-top: 4px;
+
+    &.directo {
+      color: #4caf50;
+    }
+  }
+}
+
+.vuelo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.amenidades {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .equipaje {
+    font-size: 13px;
+  }
+}
+
+.precio-disponibilidad {
+  text-align: right;
+}
+
+.disponibilidad {
+  font-size: 13px;
+  color: #666;
+
+  .pocos {
+    color: #f44336;
+    font-weight: 600;
+  }
+
+  .ocupacion {
+    color: #999;
+    margin-left: 4px;
+  }
+}
+
+.precio {
+  .monto {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1a237e;
+  }
+  .moneda {
+    font-size: 14px;
+    color: #999;
+    margin-left: 4px;
+  }
+}
+
+.vuelo-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+}

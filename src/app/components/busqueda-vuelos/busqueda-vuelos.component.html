@@ -1,0 +1,113 @@
+<div class="busqueda-container">
+  <h1 class="page-title">
+    <mat-icon>search</mat-icon>
+    Buscar Vuelos
+  </h1>
+
+  <mat-card class="search-card">
+    <mat-card-content>
+      <div class="search-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad de Origen</mat-label>
+          <input matInput [(ngModel)]="origen" placeholder="Ej: San José">
+          <mat-icon matPrefix>flight_takeoff</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad de Destino</mat-label>
+          <input matInput [(ngModel)]="destino" placeholder="Ej: Miami">
+          <mat-icon matPrefix>flight_land</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Viaje</mat-label>
+          <input matInput type="date" [(ngModel)]="fecha">
+          <mat-icon matPrefix>calendar_today</mat-icon>
+        </mat-form-field>
+
+        <div class="search-actions">
+          <button mat-raised-button color="primary" (click)="buscar()">
+            <mat-icon>search</mat-icon> Buscar
+          </button>
+          <button mat-stroked-button (click)="mostrarTodos()">
+            <mat-icon>list</mat-icon> Ver Todos
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="results-section" *ngIf="buscado">
+    <h2 *ngIf="resultados.length > 0">{{ resultados.length }} vuelo(s) encontrado(s)</h2>
+    <p *ngIf="resultados.length === 0" class="no-results">
+      <mat-icon>flight_takeoff</mat-icon>
+      No se encontraron vuelos con los criterios especificados.
+    </p>
+
+    <div class="vuelos-list">
+      <mat-card *ngFor="let vuelo of resultados" class="vuelo-card">
+        <mat-card-content>
+          <div class="vuelo-header">
+            <div class="vuelo-codigo">
+              <span class="codigo">{{ vuelo.codigo }}</span>
+              <span class="aerolinea">{{ vuelo.aerolinea }}</span>
+            </div>
+            <mat-chip-set>
+              <mat-chip [color]="getEstadoColor(vuelo.estado)" selected>{{ vuelo.estado | uppercase }}</mat-chip>
+              <mat-chip>{{ getClaseLabel(vuelo.clase) }}</mat-chip>
+            </mat-chip-set>
+          </div>
+
+          <div class="vuelo-ruta">
+            <div class="ciudad">
+              <span class="nombre">{{ vuelo.origen }}</span>
+              <span class="hora">{{ vuelo.fechaSalida | date:'HH:mm' }}</span>
+            </div>
+            <div class="linea-vuelo">
+              <div class="duracion">{{ formatearDuracion(vuelo.duracionMinutos) }}</div>
+              <div class="linea">
+                <mat-icon>flight</mat-icon>
+              </div>
+              <div class="escalas" *ngIf="vuelo.escalas.length > 0">
+                {{ vuelo.escalas.length }} escala(s)
+              </div>
+              <div class="escalas directo" *ngIf="vuelo.escalas.length === 0">
+                Directo
+              </div>
+            </div>
+            <div class="ciudad">
+              <span class="nombre">{{ vuelo.destino }}</span>
+              <span class="hora">{{ vuelo.fechaLlegada | date:'HH:mm' }}</span>
+            </div>
+          </div>
+
+          <div class="vuelo-footer">
+            <div class="amenidades">
+              <mat-icon *ngIf="vuelo.tieneWifi" matTooltip="WiFi disponible">wifi</mat-icon>
+              <mat-icon *ngIf="vuelo.tieneComida" matTooltip="Comida incluida">restaurant</mat-icon>
+              <span class="equipaje">{{ vuelo.equipajeIncluidoKg }}kg incluidos</span>
+            </div>
+            <div class="precio-disponibilidad">
+              <div class="disponibilidad">
+                <span [class.pocos]="obtenerAsientosDisponibles(vuelo) < 10">
+                  {{ obtenerAsientosDisponibles(vuelo) }} asientos disponibles
+                </span>
+                <span class="ocupacion">({{ calcularOcupacion(vuelo) }}% ocupado)</span>
+              </div>
+              <div class="precio">
+                <span class="monto">${{ vuelo.precioBase }}</span>
+                <span class="moneda">USD</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vuelo-actions">
+            <a mat-raised-button color="primary" [routerLink]="['/reservar', vuelo.id]">
+              <mat-icon>bookmark_add</mat-icon> Reservar
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

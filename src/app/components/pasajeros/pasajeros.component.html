@@ -1,0 +1,76 @@
+<div class="pasajeros-container">
+  <h1 class="page-title">
+    <mat-icon>people</mat-icon>
+    Pasajeros Registrados
+  </h1>
+
+  <div class="pasajeros-grid">
+    <mat-card *ngFor="let p of pasajeros" class="pasajero-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar class="avatar-icon">person</mat-icon>
+        <mat-card-title>{{ getNombreCompleto(p) }}</mat-card-title>
+        <mat-card-subtitle>{{ p.pasaporte }} | {{ p.nacionalidad }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>cake</mat-icon>
+            <div>
+              <span class="label">Edad</span>
+              <span class="value">{{ getEdad(p) }} años ({{ getCategoria(p) }})</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <mat-icon>email</mat-icon>
+            <div>
+              <span class="label">Email</span>
+              <span class="value">{{ p.email }}</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <mat-icon>phone</mat-icon>
+            <div>
+              <span class="label">Teléfono</span>
+              <span class="value">{{ p.telefono }}</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <mat-icon>star</mat-icon>
+            <div>
+              <span class="label">Membresía</span>
+              <span class="value" *ngIf="p.miembroFrecuente">{{ p.nivelFrecuente | titlecase }} ({{ p.millasAcumuladas | number }} millas)</span>
+              <span class="value" *ngIf="!p.miembroFrecuente">No es miembro frecuente</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <mat-icon>public</mat-icon>
+            <div>
+              <span class="label">Visas Vigentes</span>
+              <span class="value">{{ p.visasVigentes.length > 0 ? p.visasVigentes.join(', ') : 'Ninguna' }}</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <mat-icon>emergency</mat-icon>
+            <div>
+              <span class="label">Contacto de Emergencia</span>
+              <span class="value">{{ p.contactoEmergencia.nombre }} ({{ p.contactoEmergencia.relacion }})</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="necesidades" *ngIf="p.necesidadesEspeciales.length > 0">
+          <mat-chip-set>
+            <mat-chip *ngFor="let n of p.necesidadesEspeciales" color="accent" selected>
+              {{ n }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
